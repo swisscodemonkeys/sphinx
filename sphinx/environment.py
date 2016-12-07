@@ -936,6 +936,9 @@ class BuildEnvironment:
         Keep processing minimal -- just return what docutils says.
         """
         self.metadata[docname] = md = {}
+        if 'description' in doctree:
+            md['description'] = doctree['description']
+
         try:
             docinfo = doctree[0]
         except IndexError:

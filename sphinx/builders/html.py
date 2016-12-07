@@ -407,6 +407,10 @@ class StandaloneHTMLBuilder(Builder):
 
         # metadata for the document
         meta = self.env.metadata.get(docname)
+        if 'description' in meta:
+            description = meta['description']
+        else:
+            description = None
 
         # Suffix for the document
         source_suffix = '.' + self.env.doc2path(docname).split('.')[-1]
@@ -414,8 +418,8 @@ class StandaloneHTMLBuilder(Builder):
         # local TOC and global TOC tree
         self_toc = self.env.get_toc_for(docname, self)
         toc = self.render_partial(self_toc)['fragment']
-
         return dict(
+            description = description,
             parents = parents,
             prev = prev,
             next = next,
